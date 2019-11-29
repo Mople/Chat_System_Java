@@ -17,25 +17,31 @@ public class Client extends Thread{
 
     public void run() {
 		Socket link=null;
-		try {
-			link = new Socket("127.0.0.1",this.port);
-			int u=0;
-			while (u<10){
-				
-				BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-				//PrintWriter out = new PrintWriter(link.getOutputStream(),true);
-
-				String input = in.readLine();
-				System.out.println("Client "+this.user.getLogin()+input);
-
-				u++;
-			}
-			link.close();
-		}
-		catch (Exception IOException){
-			System.out.println("IO");
-		}
+		String input;
+		//BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
 		
-    }
+			
+		while (true){
+			try{link = new Socket("127.0.0.1",this.port);}catch(Exception e){break;}
+			
+			try {
+				
+				//PrintWriter out = new PrintWriter(link.getOutputStream(),true);
+				BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
+				try{input = in.readLine();}catch(Exception IOException){break;}
+				
+				System.out.println("Client "+this.user.getLogin()+input);
+				link.close();
+			}
+			catch (Exception IOException){
+				System.out.println("IO");
+			}
+
+			
+		}
+	}
+		
+		
+    
 
 }

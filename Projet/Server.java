@@ -20,20 +20,22 @@ public class Server extends Thread{
         Socket link = null;
         try{
             servSocket= new ServerSocket(port);
-            link = servSocket.accept();
+            
         }
         catch (Exception IOException){
             System.out.println("IO2");
         }
         try{
-        while (i<10){
-            
+        while (i<5){
+            link = servSocket.accept();
 
             //BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
             PrintWriter out = new PrintWriter(link.getOutputStream(),true);
             
             out.println("Message "+i+" from "+this.user.getLogin());
+            System.out.println("send");
             //System.out.println("Client "+this.user.getLogin()+input);
+            link.close();
             sleep(1000);
             
             i++;
@@ -42,11 +44,11 @@ public class Server extends Thread{
         
         }
         catch (Exception IOException){
-            System.out.println("IO");
+            System.out.println("IO1");
         }
         try{
             servSocket.close();
-            link.close();
+            
         }catch (Exception IOException){System.out.println("IO3");}
         
     }
