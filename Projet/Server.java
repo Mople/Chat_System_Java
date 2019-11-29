@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
 import java.lang.*;
+import java.util.*;
 
 public class Server extends Thread{
 
@@ -18,6 +19,7 @@ public class Server extends Thread{
         int i=0;
         ServerSocket servSocket=null;
         Socket link = null;
+        Scanner sc = new Scanner(System.in);
         try{
             servSocket= new ServerSocket(port);
             
@@ -25,14 +27,14 @@ public class Server extends Thread{
         catch (Exception IOException){
             System.out.println("IO2");
         }
+
         try{
         while (i<5){
             link = servSocket.accept();
-
             //BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
             PrintWriter out = new PrintWriter(link.getOutputStream(),true);
-            
-            out.println("Message "+i+" from "+this.user.getLogin());
+            String str = sc.nextLine();
+            out.println("Message "+str+" from "+this.user.getLogin());
             System.out.println("send");
             //System.out.println("Client "+this.user.getLogin()+input);
             link.close();

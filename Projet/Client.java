@@ -29,8 +29,9 @@ public class Client extends Thread{
 				//PrintWriter out = new PrintWriter(link.getOutputStream(),true);
 				BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
 				try{input = in.readLine();}catch(Exception IOException){break;}
-				
-				System.out.println("Client "+this.user.getLogin()+input);
+				if (input != null){	
+					System.out.println("Client "+this.user.getLogin()+input);
+				}
 				link.close();
 			}
 			catch (Exception IOException){
