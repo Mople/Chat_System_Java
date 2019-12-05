@@ -7,7 +7,7 @@ public class UDPListener{
 
     }
 
-    public String receiveMessage() throws IOException {
+    public UDPPacket receiveMessage() throws IOException {
         DatagramSocket dgramSocket = null;
         try{
             dgramSocket = new DatagramSocket(3500);
@@ -23,11 +23,12 @@ public class UDPListener{
         }catch(IOException e){
             System.out.println("Error IO udplist");
         }
-        String msg = new String(inPacket.getData(),0,inPacket.getLength());
+
+        UDPPacket packet = new UDPPacket(inPacket);        
         
         dgramSocket.close();
         
-        return msg;
+        return packet;
     }
 
 }

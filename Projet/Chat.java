@@ -13,7 +13,9 @@ public class Chat{
         */
         if (Integer.parseInt(args[0])==1){
             UDPListener udplist = new UDPListener();
-            udplist.receiveMessage();
+            UDPPacket packet = udplist.receiveMessage();
+            String msg = packet.getData();
+            System.out.println(msg);
         }
         else if (Integer.parseInt(args[0])==2){
             UDPSender udpsend = new UDPSender();
