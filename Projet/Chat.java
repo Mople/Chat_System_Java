@@ -3,15 +3,15 @@ import java.io.*;
 
 public class Chat{
     public static void main(String[] args) throws IOException{
-        /*if (Integer.parseInt(args[0])==1){
-            User user1 = new User("1","User1", 1250, 1260);
-            user1.startClient();
-        } else if (Integer.parseInt(args[0])==2) {
-            User user2 = new User("2","User2", 1260, 1250);
-            user2.startServer();
-        }
-        */
         if (Integer.parseInt(args[0])==1){
+            User user1 = new User("Pseudo1",InetAddress.getLocalHost());
+            user1.startManagerListen();
+        } else if (Integer.parseInt(args[0])==2) {
+            User user2 = new User("Pseudo2",InetAddress.getLocalHost());
+            user2.startManagerSend();
+        }
+        
+        /*if (Integer.parseInt(args[0])==1){
             UDPListener udplist = new UDPListener();
             UDPPacket packet = udplist.receiveMessage();
             String msg = packet.getData();
@@ -21,5 +21,7 @@ public class Chat{
             UDPSender udpsend = new UDPSender();
             udpsend.sendMessage();
         }
+        */
+        
     }
 }

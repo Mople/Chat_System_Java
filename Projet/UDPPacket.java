@@ -12,7 +12,7 @@ public class UDPPacket{
         this.port=dp.getPort();
     }
 
-    public InetAddress gInetAddress(){
+    public InetAddress getInetAddress(){
         return this.addr;
     }
 
