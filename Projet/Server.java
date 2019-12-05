@@ -33,9 +33,9 @@ public class Server extends Thread{
                 link = servSocket.accept();
                 //BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
                 PrintWriter out = new PrintWriter(link.getOutputStream(),true);
-                String str = sc.nextLine();
-                out.println("Message "+str+" from "+this.user.getLogin());
-                System.out.println("send");
+                //String str = sc.nextLine();
+                //System.out.println("send");
+                out.println("Message from "+this.user.getLogin());
                 //System.out.println("Client "+this.user.getLogin()+input);
                 link.close();
                 sleep(1000);
