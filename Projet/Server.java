@@ -29,25 +29,24 @@ public class Server extends Thread{
         }
 
         try{
-        while (i<5){
-            link = servSocket.accept();
-            //BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-            PrintWriter out = new PrintWriter(link.getOutputStream(),true);
-            String str = sc.nextLine();
-            out.println("Message "+str+" from "+this.user.getLogin());
-            System.out.println("send");
-            //System.out.println("Client "+this.user.getLogin()+input);
-            link.close();
-            sleep(1000);
-            
-            i++;
-            
-        }
+            while (i<5){
+                link = servSocket.accept();
+                //BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
+                PrintWriter out = new PrintWriter(link.getOutputStream(),true);
+                String str = sc.nextLine();
+                out.println("Message "+str+" from "+this.user.getLogin());
+                System.out.println("send");
+                //System.out.println("Client "+this.user.getLogin()+input);
+                link.close();
+                sleep(1000);
+                i++;
+            }
         
         }
         catch (Exception IOException){
             System.out.println("IO1");
         }
+        sc.close();
         try{
             servSocket.close();
             
