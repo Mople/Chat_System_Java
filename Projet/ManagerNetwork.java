@@ -27,11 +27,11 @@ public class ManagerNetwork{
     }
 
     public void startTCPServer() throws IOException{
-        new Server(this.user, 3550);
+        new Server(this.user, 3600);
     }
 
     public void startTCPClient() throws IOException{
-        new Client(this.userList.get(0), 3550);
+        new Client(this.userList.get(0), 3600);
     }
 
     public List<User> getUserList(){

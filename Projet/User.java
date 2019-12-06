@@ -36,4 +36,8 @@ public class User{
     public String getLogin(){
         return this.userLogin;
     }
+
+    public InetAddress getInetAddress(){
+        return this.addr;
+    }
 }

@@ -22,7 +22,7 @@ public class Client extends Thread{
 		
 			
 		while (true){
-			try{link = new Socket("127.0.0.1",this.port);}catch(Exception e){break;}
+			try{link = new Socket(user.getInetAddress(),this.port);}catch(Exception e){break;}
 			
 			try {
 				
