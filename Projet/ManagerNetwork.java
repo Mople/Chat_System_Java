@@ -8,6 +8,7 @@ public class ManagerNetwork{
     private UDPSender udpSend;
     private User user;
     private List<User> userList;
+    private Controller contr;
 
     public ManagerNetwork(User user){
         this.udpSend = new UDPSender();
@@ -23,9 +24,8 @@ public class ManagerNetwork{
 
     //Read the packet received and do something depending on the message
     public void readPacket(UDPPacket packet) throws IOException{
-        User newUser = new User(packet.getData(),packet.getInetAddress());
+        User newUser = new User(null,packet.getData(),packet.getInetAddress());
         userList.add(newUser);
-        System.out.println(newUser.getLogin());
         startTCPClient();
     } 
 
@@ -44,10 +44,20 @@ public class ManagerNetwork{
         new Client(this.userList.get(0), 3600);
     }
 
+
+    /*
+    Get Methods
+    */
     public List<User> getUserList(){
         return userList;
     }
 
+    /*
+    Set Methods
+    */
+    public void setController(Controller contr){
+        this.contr=contr;
+    }
 
     
 
