@@ -30,6 +30,7 @@ public class UDPListener extends Thread{
             }catch(IOException e){
                 System.out.println("Error IO udplist");
             }
+            System.out.println("message received");
             dgramSocket.close();
         }
     }

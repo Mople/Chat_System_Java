@@ -13,18 +13,19 @@ public class ManagerNetwork{
         this.udpSend = new UDPSender();
         this.user=user;
         this.userList= new ArrayList<>();
-        this.udpListen = new UDPListener(this);
+        //this.udpListen = new UDPListener(this);
     }
 
-    /*Thread listening for UDP packet on local network 
+    //Thread listening for UDP packet on local network 
     public void listenConnection() throws IOException{
         this.udpListen = new UDPListener(this);
-    }*/
+    }
 
     //Read the packet received and do something depending on the message
     public void readPacket(UDPPacket packet) throws IOException{
         User newUser = new User(packet.getData(),packet.getInetAddress());
         userList.add(newUser);
+        System.out.println(newUser.getLogin());
         startTCPClient();
     } 
 

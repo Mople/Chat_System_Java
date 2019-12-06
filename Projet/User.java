@@ -16,10 +16,10 @@ public class User{
     }
         
 
-    /*public void startUser1()throws IOException{
-        manager.startTCPClient();
+    public void startUser1()throws IOException{
+        manager.listenConnection();
 
-    }*/
+    }
 
     public void startUser2()throws IOException{
         manager.sendUDPConnection();
