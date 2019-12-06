@@ -9,7 +9,8 @@ public class UDPSender{
 
     }
 
-    public void sendMessage() throws IOException{
+    public void sendFirstMessage() throws IOException{
+        System.out.println("Entrer pseudo : ");
         Scanner sc = new Scanner(System.in);
         String msg = sc.nextLine();
 
@@ -17,7 +18,7 @@ public class UDPSender{
         try{
             dgramSocket = new DatagramSocket();
         }catch(SocketException e){
-            System.out.println("Error ceate diagram socket sender");
+            System.out.println("Error create diagram socket sender");
         }
         DatagramPacket outPacket = new DatagramPacket(msg.getBytes(), msg.length(),InetAddress.getByName("255.255.255.255"),3500);
         

@@ -13,15 +13,10 @@ public class User{
         this.userLogin=login;
         this.addr=addr;
         this.manager=new ManagerNetwork(this);
-        //this.clientPort=clientPort;
-        //this.servPort=servPort;
-
     }
         
 
     public void startUser1()throws IOException{
-        manager.listenConnection();
-        List<User> userList = manager.getUserList();
         manager.startTCPClient();
 
     }
