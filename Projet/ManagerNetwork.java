@@ -22,10 +22,10 @@ public class ManagerNetwork{
     }*/
 
     //Read the packet received and do something depending on the message
-    public void readPacket(UDPPacket packet){
+    public void readPacket(UDPPacket packet) throws IOException{
         User newUser = new User(packet.getData(),packet.getInetAddress());
         userList.add(newUser);
-
+        startTCPClient();
     } 
 
     //Broadcast on network a connection message

@@ -24,13 +24,12 @@ public class UDPListener extends Thread{
             byte[] buffer = new byte[256];
             DatagramPacket inPacket = new DatagramPacket(buffer, buffer.length);
             try{
-                dgramSocket.receive(inPacket);
+                dgramSocket.receive(inPacket);            
+                UDPPacket packet = new UDPPacket(inPacket);        
+                manager.readPacket(packet);
             }catch(IOException e){
                 System.out.println("Error IO udplist");
             }
-
-            UDPPacket packet = new UDPPacket(inPacket);        
-            manager.readPacket(packet);
             dgramSocket.close();
         }
     }
