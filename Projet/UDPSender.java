@@ -4,12 +4,14 @@ import java.util.*;
 
 public class UDPSender{
 
+    
 
-    public UDPSender(){
-
+    public UDPSender(String login){
+        sendFirstMessage(login);
     }
 
     public void sendFirstMessage(String login) {
+        System.out.println("SEND");
         String msg = "New User : "+login;
 
         

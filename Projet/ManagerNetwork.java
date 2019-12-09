@@ -11,7 +11,7 @@ public class ManagerNetwork{
     //private Controller contr;
 
     public ManagerNetwork(User user){
-        this.udpSend = new UDPSender();
+        this.udpSend = new UDPSender(user.getLogin());
         this.user=user;
         this.userList= new ArrayList<>();
         userList.add(user);
@@ -19,9 +19,9 @@ public class ManagerNetwork{
     }
 
     //Thread listening for UDP packet on local network 
-    public void listenConnection() {
+    /*public void listenConnection() {
         this.udpListen = new UDPListener(this);
-    }
+    }*/
 
     //Read the packet received and do something depending on the message
     public void readPacket(UDPPacket packet) {
