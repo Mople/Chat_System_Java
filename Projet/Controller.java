@@ -17,9 +17,10 @@ public class Controller{
         }catch(UnknownHostException e){
             System.out.println("Error init addr user in controller");
         }
-        this.user.setController(this);
+        sc.close();
+        //this.user.setController(this);
         this.manager=new ManagerNetwork(user);
-        this.user.setManagerNetwork(manager);
+        //this.user.setManagerNetwork(manager);
     }
 
 
@@ -34,6 +35,8 @@ public class Controller{
         String data = sc.nextLine();
         return data;
     }
+
+    
 
 
 }

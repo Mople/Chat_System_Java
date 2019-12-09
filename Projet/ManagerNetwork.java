@@ -27,6 +27,7 @@ public class ManagerNetwork{
     //Read the packet received and do something depending on the message
     public void readPacket(UDPPacket packet) {
         String data = packet.getData();
+        System.out.println("Packet received");
         if (data.startsWith("New User : ")){
             String pseudoUser = data.replaceFirst("New User : ", "");
             User newUser = new User(pseudoUser, packet.getInetAddress());
@@ -46,7 +47,7 @@ public class ManagerNetwork{
 
     //Broadcast on network a connection message
     public void sendUDPConnectionBroadcast() {
-        udpSend.sendFirstMessage();
+        udpSend.sendFirstMessage(this.user.getLogin());
     }
 
     //Reply to a broadcast
@@ -57,14 +58,14 @@ public class ManagerNetwork{
 
 
     //Launch a TCP Server on port 3600
-    public void startTCPServer() throws IOException{
+    /*public void startTCPServer() throws IOException{
         new Server(this.user, 3600);
     }
 
     //Launch a TCP Client connected with another user(on his port 3600)
     public void startTCPClient() throws IOException{
         new Client(this.userList.get(0), 3600);
-    }
+    }*/
 
 
     /*

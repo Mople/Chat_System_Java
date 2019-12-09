@@ -9,10 +9,8 @@ public class UDPSender{
 
     }
 
-    public void sendFirstMessage() {
-        System.out.println("Entrer pseudo : ");
-        Scanner sc = new Scanner(System.in);
-        String msg = "New User : "+sc.nextLine();
+    public void sendFirstMessage(String login) {
+        String msg = "New User : "+login;
 
         
         DatagramSocket dgramSocket = null;
@@ -27,7 +25,6 @@ public class UDPSender{
         }catch(UnknownHostException e){
             System.out.println("Error create dgram packet");
         }
-        sc.close();
         try{
             dgramSocket.send(outPacket);
         }
