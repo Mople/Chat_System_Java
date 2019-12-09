@@ -8,7 +8,6 @@ public class ManagerNetwork{
     private UDPSender udpSend;
     private User user;
     private List<User> userList;
-    //private Controller contr;
 
     public ManagerNetwork(User user){
         this.udpSend = new UDPSender(user.getLogin());
@@ -18,10 +17,6 @@ public class ManagerNetwork{
         this.udpListen = new UDPListener(this);
     }
 
-    //Thread listening for UDP packet on local network 
-    /*public void listenConnection() {
-        this.udpListen = new UDPListener(this);
-    }*/
 
     //Read the packet received and do something depending on the message
     public void readPacket(UDPPacket packet) {
@@ -31,6 +26,7 @@ public class ManagerNetwork{
             String pseudoUser = data.replaceFirst("New User : ", "");
             User newUser = new User(pseudoUser, packet.getInetAddress());
             userList.add(newUser);
+            sendUDPConnectionReply(newUser.getInetAddress());
             System.out.println("New user on network " + pseudoUser);
             System.out.println("Size of userList : "+userList.size());
         }
@@ -56,15 +52,26 @@ public class ManagerNetwork{
     
 
 
+    public void startCommunication(String name){
+        int i=0;
+        Boolean trouve=false;
+        while (i<this.userList.size()||trouve){
+            if (this.userList.get(i).getLogin()==name){
+                startTCPClient(this.userList.get(i));
+            }
+            trouve=true;
+        }
+    }
+
     //Launch a TCP Server on port 3600
-    /*public void startTCPServer() throws IOException{
+    public void startTCPServer(){
         new Server(this.user, 3600);
     }
 
     //Launch a TCP Client connected with another user(on his port 3600)
-    public void startTCPClient() throws IOException{
-        new Client(this.userList.get(0), 3600);
-    }*/
+    public void startTCPClient(User user){
+        new Client(user, 3600);
+    }
 
 
     /*
@@ -74,12 +81,6 @@ public class ManagerNetwork{
         return userList;
     }
 
-    /*
-    Set Methods
-    */
-   /* public void setController(Controller contr){
-        this.contr=contr;
-    }*/
 
     
 

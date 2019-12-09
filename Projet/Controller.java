@@ -10,26 +10,19 @@ public class Controller{
 
     public Controller(){
         this.sc=new Scanner(System.in);
-        //String id = askID(sc);
         String name= askPseudo(sc);
         try{
             this.user=new User(name, InetAddress.getLocalHost());
+            System.out.println(InetAddress.getLocalHost());
         }catch(UnknownHostException e){
             System.out.println("Error init addr user in controller");
         }
         sc.close();
-        //this.user.setController(this);
         this.manager=new ManagerNetwork(user);
-        //manager.sendUDPConnectionBroadcast();
-        //this.user.setManagerNetwork(manager);
+        makeCommand(sc);
     }
 
 
-    public String askID(Scanner sc){
-        System.out.println("Enter your ID :");
-        String data = sc.nextLine();
-        return data;
-    }
 
     public String askPseudo(Scanner sc){
         System.out.println("Enter your pseudo :");
@@ -38,6 +31,15 @@ public class Controller{
     }
 
     
+    public void makeCommand(Scanner sc){
+        System.out.println("Next action ?");
+        String commande = sc.nextLine();
+        if (commande.startsWith("START CHAT")){
+            System.out.println("With who?");
+            String user = sc.nextLine();
+            //manager.startCommunication(user);
+        }
+    }
 
 
 }

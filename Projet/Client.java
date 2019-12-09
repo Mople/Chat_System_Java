@@ -8,7 +8,7 @@ public class Client extends Thread{
 	private User user;
 	private int port;
 
-    public Client (User user, int port) throws IOException {
+    public Client (User user, int port) {
 		this.user=user;
 		this.port=port;
 		this.start();
