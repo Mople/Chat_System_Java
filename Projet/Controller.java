@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.net.*;
 import java.util.*;
 
@@ -9,10 +10,10 @@ public class Controller{
 
     public Controller(){
         this.sc=new Scanner(System.in);
-        String id = askID(sc);
+        //String id = askID(sc);
         String name= askPseudo(sc);
         try{
-            this.user=new User(id, name, InetAddress.getLocalHost());
+            this.user=new User(name, InetAddress.getLocalHost());
         }catch(UnknownHostException e){
             System.out.println("Error init addr user in controller");
         }

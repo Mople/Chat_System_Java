@@ -3,29 +3,18 @@ import java.util.*;
 import java.io.*;
 
 public class User{
-    private String userID;
+    //private String userID;
     private String userLogin;
     private InetAddress addr;
     private ManagerNetwork manager;
     private Controller contr;
 
-    public User(String id, String login, InetAddress addr){
-        this.userID=id;
+    public User(String login, InetAddress addr){
+        //this.userID=id;
         this.userLogin=login;
         this.addr=addr;
     }
         
-
-    public void startUser1()throws IOException{
-        manager.listenConnection();
-
-    }
-
-    public void startUser2()throws IOException{
-        manager.sendUDPConnection();
-        manager.startTCPServer();
-    }
-
 
     /*
     Get Methods
