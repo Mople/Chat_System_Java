@@ -11,7 +11,11 @@ public class Controller{
         this.sc=new Scanner(System.in);
         String id = askID(sc);
         String name= askPseudo(sc);
-        try{this.user=new User(id, name, InetAddress.getLocalHost());}catch(UnknownHostException e){System.out.println("Error init addr user in controller");};
+        try{
+            this.user=new User(id, name, InetAddress.getLocalHost());
+        }catch(UnknownHostException e){
+            System.out.println("Error init addr user in controller");
+        }
         this.user.setController(this);
         this.manager=new ManagerNetwork(user);
         this.user.setManagerNetwork(manager);

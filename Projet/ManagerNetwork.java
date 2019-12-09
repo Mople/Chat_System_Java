@@ -14,7 +14,7 @@ public class ManagerNetwork{
         this.udpSend = new UDPSender();
         this.user=user;
         this.userList= new ArrayList<>();
-        //this.udpListen = new UDPListener(this);
+        this.udpListen = new UDPListener(this);
     }
 
     //Thread listening for UDP packet on local network 
