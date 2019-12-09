@@ -20,6 +20,7 @@ public class Controller{
         sc.close();
         //this.user.setController(this);
         this.manager=new ManagerNetwork(user);
+        manager.sendUDPConnectionBroadcast();
         //this.user.setManagerNetwork(manager);
     }
 
