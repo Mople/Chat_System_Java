@@ -23,7 +23,7 @@ public class UDPSender{
             System.out.println("Error create diagram socket sender");
         }
         try{
-            outPacket = new DatagramPacket(msg.getBytes(), msg.length(),InetAddress.getByName("255.255.255.255"),3500);
+            outPacket = new DatagramPacket(msg.getBytes(), msg.length(),InetAddress.getByName("10.1.255.255"),3500);
         }catch(UnknownHostException e){
             System.out.println("Error create dgram packet");
         }
