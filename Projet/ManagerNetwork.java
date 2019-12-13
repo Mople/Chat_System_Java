@@ -14,6 +14,7 @@ public class ManagerNetwork{
         this.user=user;
         this.userList= new ArrayList<>();
         userList.add(user);
+        startTCPClient(user);
     }
 
 
@@ -43,28 +44,15 @@ public class ManagerNetwork{
         
     } 
 
-    //Broadcast on network a connection message
-    public void sendUDPConnectionBroadcast() {
-        udpSend.sendFirstMessage(this.user.getLogin());
-    }
+    
 
     //Reply to a broadcast
     public void sendUDPConnectionReply(InetAddress address){
         udpSend.sendReply(this.user.getLogin(),address);
     }
     
-
-
-    public void startCommunication(String name){
-        int i=0;
-        Boolean trouve=false;
-        while (i<this.userList.size()||trouve){
-            if (this.userList.get(i).getLogin()==name){
-                startTCPClient(this.userList.get(i));
-            }
-            trouve=true;
-        }
-    }
+  
+    
 
     //Launch a TCP Server on port 3600
     public void startTCPServer(){
