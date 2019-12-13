@@ -3,50 +3,31 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-public class Server extends Thread{
+public class Server {
 
-    private User user;
-    private int port;
+    private ManagerNetwork manager;
 
-    public Server(User user,int port) {
-        this.user=user;
-        this.port=port;
-        this.start();
+    public Server(ManagerNetwork man) {
+        this.manager=man;
+        waitConnection();
         
     }
 
-    public void run() {
-        int i=0;
+    public void waitConnection() {
         ServerSocket servSocket=null;
-        Socket link = null;
-        Scanner sc = new Scanner(System.in);
         try{
-            servSocket= new ServerSocket(port);
+            servSocket= new ServerSocket(3600);
+            Boolean stop=false;
+            while(!stop){
+            new TCPServerThread(servSocket.accept(),this.manager.getUser());
+            }  
             
         }
         catch (Exception IOException){
             System.out.println("IO2");
         }
+         
 
-        try{
-            while (i<5){
-                link = servSocket.accept();
-                //BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-                PrintWriter out = new PrintWriter(link.getOutputStream(),true);
-                //String str = sc.nextLine();
-                //System.out.println("send");
-                out.println("Message from "+this.user.getLogin());
-                //System.out.println("Client "+this.user.getLogin()+input);
-                link.close();
-                sleep(1000);
-                i++;
-            }
-        
-        }
-        catch (Exception IOException){
-            System.out.println("IO1");
-        }
-        sc.close();
         try{
             servSocket.close();
             

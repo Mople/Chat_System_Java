@@ -16,8 +16,11 @@ public class Controller{
         this.user=new User(name, addr);
         System.out.println(addr);
         this.manager=new ManagerNetwork(user);
-        makeCommand(sc);
+        
+        Thread tc =new TerminalCommand(sc);
+        try{tc.join();}catch(InterruptedException e){}
         sc.close();
+        
     }
 
 
@@ -51,18 +54,11 @@ public class Controller{
         return data;
     }
 
-    
-    private void makeCommand(Scanner sc){
-        System.out.println("Next action ?");
-        System.out.println("Current User List :");
+    public void printUserList(){
         manager.printUserList();
-        String commande = sc.nextLine();
-        if (commande.startsWith("START CHAT")){
-            System.out.println("With who?");
-            String user = sc.nextLine();
-            //manager.startCommunication(user);
-        }
     }
+    
+    
 
 
 }

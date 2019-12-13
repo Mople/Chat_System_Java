@@ -27,6 +27,8 @@ public class ManagerNetwork{
             userList.add(newUser);
             sendUDPConnectionReply(newUser.getInetAddress());
             System.out.println("New user on network " + pseudoUser);
+            System.out.println("New userList :");
+            printUserList();
             System.out.println("Size of userList : "+userList.size());
         }
         else if (data.startsWith("User on network : ")){
@@ -34,6 +36,8 @@ public class ManagerNetwork{
             User newUser = new User(pseudoUser, packet.getInetAddress());
             userList.add(newUser);
             System.out.println("User already on network " + pseudoUser);
+            System.out.println("New userList :");
+            printUserList();
             System.out.println("Size of userList : " + userList.size());
         }
         
@@ -64,7 +68,7 @@ public class ManagerNetwork{
 
     //Launch a TCP Server on port 3600
     public void startTCPServer(){
-        new Server(this.user, 3600);
+        new Server(this);
     }
 
     //Launch a TCP Client connected with another user(on his port 3600)
@@ -79,7 +83,11 @@ public class ManagerNetwork{
         Iterator<User> iteUser = userList.iterator();
         while (iteUser.hasNext()){
             User currentUSer = iteUser.next();
+            if (currentUSer.getLogin()==this.user.getLogin()){
+                System.out.println("(You) "+currentUSer.getLogin());
+            }else{
             System.out.println(currentUSer.getLogin());
+            }
         }        
     }
     /*
@@ -87,6 +95,10 @@ public class ManagerNetwork{
     */
     public List<User> getUserList(){
         return userList;
+    }
+
+    public User getUser(){
+        return this.user;
     }
 
 
