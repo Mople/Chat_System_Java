@@ -4,17 +4,16 @@ import java.util.*;
 
 public class ManagerNetwork{
 
-    private UDPListener udpListen;
     private UDPSender udpSend;
     private User user;
     private List<User> userList;
 
     public ManagerNetwork(User user){
         this.udpSend = new UDPSender(user.getLogin());
+        new UDPListener(this);
         this.user=user;
         this.userList= new ArrayList<>();
         userList.add(user);
-        this.udpListen = new UDPListener(this);
     }
 
 
@@ -74,6 +73,15 @@ public class ManagerNetwork{
     }
 
 
+
+
+    public void printUserList(){
+        Iterator<User> iteUser = userList.iterator();
+        while (iteUser.hasNext()){
+            User currentUSer = iteUser.next();
+            System.out.println(currentUSer.getLogin());
+        }        
+    }
     /*
     Get Methods
     */

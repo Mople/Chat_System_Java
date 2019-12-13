@@ -13,12 +13,11 @@ public class Controller{
         this.sc=new Scanner(System.in);
         String name= askPseudo(sc);
         InetAddress addr = findUserAddr();
-        if (addr==null){System.out.println("addr =null");}
         this.user=new User(name, addr);
         System.out.println(addr);
-        sc.close();
         this.manager=new ManagerNetwork(user);
         makeCommand(sc);
+        sc.close();
     }
 
 
@@ -55,6 +54,8 @@ public class Controller{
     
     private void makeCommand(Scanner sc){
         System.out.println("Next action ?");
+        System.out.println("Current User List :");
+        manager.printUserList();
         String commande = sc.nextLine();
         if (commande.startsWith("START CHAT")){
             System.out.println("With who?");

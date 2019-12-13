@@ -8,10 +8,10 @@ public class UDPListener extends Thread{
 
     public UDPListener(ManagerNetwork man){
         this.manager=man;
-        this.start();
+        start();
     }
 
-    public void start() {
+    public void run() {
         while(true){
             DatagramSocket dgramSocket = null;
             try{
