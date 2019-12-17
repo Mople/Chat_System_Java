@@ -6,9 +6,11 @@ import java.io.*;
 public class TCPListenerThread extends Thread{
 
     private Socket link;
+    private ManagerNetwork manager;
 
-    public TCPListenerThread(Socket s){
+    public TCPListenerThread(Socket s, ManagerNetwork man){
         this.link=s;
+        this.manager=man;
         start();
     }
 
@@ -17,7 +19,9 @@ public class TCPListenerThread extends Thread{
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
             input = in.readLine();
-            System.out.println("Received from: "+input);
+            System.out.println("Received : "+input);
+            InetAddress destAddr = this.link.getInetAddress();
+            this.manager.MessageReceived(destAddr,input);
             this.link.close();
         }
         catch (Exception IOException){

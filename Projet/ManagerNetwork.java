@@ -8,22 +8,24 @@ public class ManagerNetwork{
     private User user;
     private String userLogin;
     private List<User> userList;
+    private Controller control;
 
-    public ManagerNetwork(User user){
+    public ManagerNetwork(Controller c,User user){
         this.userLogin = user.getLogin();
         this.udpSend = new UDPSender(this.userLogin);
         new UDPListener(this);
 
         this.user=user;
+        this.control=c;
 
         this.userList= new ArrayList<>();
         userList.add(user);
-        new Server();
+        new Server(this);
     }
 
 
     //Read the packet received and do something depending on the message
-    public void readPacket(UDPPacket packet) {
+    public void readUDPPacket(UDPPacket packet) {
         String data = packet.getData();
         System.out.println("Packet received");
         if (data.startsWith("New User : ")){
@@ -58,37 +60,52 @@ public class ManagerNetwork{
   
 
     public void sendMessage(String userName, String msg){
-        //Iterator<User> iteUser = userList.iterator();
         Boolean stop = false;
         User destUser= new User(null, null);
         int i=0;
         while (i<this.userList.size() && !stop){
             destUser = this.userList.get(i);
             System.out.println(destUser.getLogin());
-            if (destUser.getLogin()==userName){
+            if (destUser.getLogin().equals(userName)){
                 System.out.println("found");
                 stop=true;
             }
             i++;
         }
-        //if (!stop){System.out.println("User Not found in sendMessage");}
-        //else{
+        if (!stop){System.out.println("User Not found in sendMessage");}
+        else{
             System.out.println(destUser.getLogin());
             new Client(destUser, 3600, msg);
-        //}
+        }
     }
 
-
+    public void MessageReceived(InetAddress destAddr,String msg){
+        Boolean found=false;
+        User destUser =null;
+        System.out.println(destAddr);
+        for (User u : this.userList){
+            System.out.println("- "+u.getInetAddress());
+            if (u.getInetAddress().equals(destAddr)){
+                found=true;
+                destUser=u;
+            }
+        }
+        if (found){
+            this.control.displayMessageReceived(destUser, msg);
+        }else{
+            System.out.println("Message received but no user exist at this addr");
+        }
+    }
 
 
     public void printUserList(){
         Iterator<User> iteUser = userList.iterator();
         while (iteUser.hasNext()){
             User currentUser = iteUser.next();
-            if (currentUser.getLogin()==this.userLogin){
-                System.out.println("(You) "+currentUser.getLogin());
+            if (currentUser.getLogin().equals(this.userLogin)){
+                System.out.println("(You) "+currentUser.getLogin()+" "+currentUser.getInetAddress());
             }else{
-            System.out.println(currentUser.getLogin());
+            System.out.println(currentUser.getLogin()+" "+currentUser.getInetAddress());
             }
         }        
     }

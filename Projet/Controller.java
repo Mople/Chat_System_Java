@@ -15,7 +15,7 @@ public class Controller{
         InetAddress addr = findUserAddr();
         this.user=new User(name, addr);
 
-        this.manager=new ManagerNetwork(user);
+        this.manager=new ManagerNetwork(this,this.user);
         Thread tc =new TerminalCommand(this,this.sc);
         try{tc.join();}catch(InterruptedException e){}
         this.sc.close();
@@ -66,4 +66,7 @@ public class Controller{
         this.manager.sendMessage(userName, msg);
     }
 
+    public void displayMessageReceived(User user, String message){
+
+    }
 }

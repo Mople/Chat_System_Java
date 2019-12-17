@@ -5,8 +5,10 @@ import java.util.*;
 
 public class Server extends Thread{
 
+    private ManagerNetwork manager;
 
-    public Server() {
+    public Server(ManagerNetwork man) {
+        this.manager=man;
         start();
         
     }
@@ -17,7 +19,7 @@ public class Server extends Thread{
             servSocket= new ServerSocket(3600);
             Boolean stop=false;
             while(!stop){
-            new TCPListenerThread(servSocket.accept());
+            new TCPListenerThread(servSocket.accept(),this.manager);
             }  
             
         }
