@@ -57,21 +57,25 @@ public class ManagerNetwork{
     
   
 
-    //Launch a TCP Client connected with another user(on his port 3600)
     public void sendMessage(String userName, String msg){
-        Iterator<User> iteUser = this.userList.iterator();
+        //Iterator<User> iteUser = userList.iterator();
         Boolean stop = false;
-        User destUser=null;
-        while (iteUser.hasNext()&& !stop){
-            destUser = iteUser.next();
+        User destUser= new User(null, null);
+        int i=0;
+        while (i<this.userList.size() && !stop){
+            destUser = this.userList.get(i);
+            System.out.println(destUser.getLogin());
             if (destUser.getLogin()==userName){
+                System.out.println("found");
                 stop=true;
             }
+            i++;
         }
-        if (!stop){System.out.println("User Not found in sendMessage");}
-        else{
+        //if (!stop){System.out.println("User Not found in sendMessage");}
+        //else{
+            System.out.println(destUser.getLogin());
             new Client(destUser, 3600, msg);
-        }
+        //}
     }
 
 
@@ -80,11 +84,11 @@ public class ManagerNetwork{
     public void printUserList(){
         Iterator<User> iteUser = userList.iterator();
         while (iteUser.hasNext()){
-            User currentUSer = iteUser.next();
-            if (currentUSer.getLogin()==this.userLogin){
-                System.out.println("(You) "+currentUSer.getLogin());
+            User currentUser = iteUser.next();
+            if (currentUser.getLogin()==this.userLogin){
+                System.out.println("(You) "+currentUser.getLogin());
             }else{
-            System.out.println(currentUSer.getLogin());
+            System.out.println(currentUser.getLogin());
             }
         }        
     }

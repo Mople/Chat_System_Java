@@ -16,7 +16,6 @@ public class Controller{
         this.user=new User(name, addr);
 
         this.manager=new ManagerNetwork(user);
-        
         Thread tc =new TerminalCommand(this,this.sc);
         try{tc.join();}catch(InterruptedException e){}
         this.sc.close();
@@ -63,6 +62,7 @@ public class Controller{
     }
 
     public void send(String userName,String msg){
+        System.out.println("test : "+userName);
         this.manager.sendMessage(userName, msg);
     }
 

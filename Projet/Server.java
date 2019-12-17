@@ -3,15 +3,15 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-public class Server {
+public class Server extends Thread{
 
 
     public Server() {
-        waitConnection();
+        start();
         
     }
 
-    public void waitConnection() {
+    public void run() {
         ServerSocket servSocket=null;
         try{
             servSocket= new ServerSocket(3600);
