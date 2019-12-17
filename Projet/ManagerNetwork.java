@@ -6,15 +6,19 @@ public class ManagerNetwork{
 
     private UDPSender udpSend;
     private User user;
+    private String userLogin;
     private List<User> userList;
 
     public ManagerNetwork(User user){
-        this.udpSend = new UDPSender(user.getLogin());
+        this.userLogin = user.getLogin();
+        this.udpSend = new UDPSender(this.userLogin);
         new UDPListener(this);
+
         this.user=user;
+
         this.userList= new ArrayList<>();
         userList.add(user);
-        startTCPClient(user);
+        new Server();
     }
 
 
@@ -48,20 +52,26 @@ public class ManagerNetwork{
 
     //Reply to a broadcast
     public void sendUDPConnectionReply(InetAddress address){
-        udpSend.sendReply(this.user.getLogin(),address);
+        udpSend.sendReply(this.userLogin,address);
     }
     
   
-    
-
-    //Launch a TCP Server on port 3600
-    public void startTCPServer(){
-        new Server(this);
-    }
 
     //Launch a TCP Client connected with another user(on his port 3600)
-    public void startTCPClient(User user){
-        new Client(user, 3600);
+    public void sendMessage(String userName, String msg){
+        Iterator<User> iteUser = this.userList.iterator();
+        Boolean stop = false;
+        User destUser=null;
+        while (iteUser.hasNext()&& !stop){
+            destUser = iteUser.next();
+            if (destUser.getLogin()==userName){
+                stop=true;
+            }
+        }
+        if (!stop){System.out.println("User Not found in sendMessage");}
+        else{
+            new Client(destUser, 3600, msg);
+        }
     }
 
 
@@ -71,7 +81,7 @@ public class ManagerNetwork{
         Iterator<User> iteUser = userList.iterator();
         while (iteUser.hasNext()){
             User currentUSer = iteUser.next();
-            if (currentUSer.getLogin()==this.user.getLogin()){
+            if (currentUSer.getLogin()==this.userLogin){
                 System.out.println("(You) "+currentUSer.getLogin());
             }else{
             System.out.println(currentUSer.getLogin());
@@ -85,9 +95,6 @@ public class ManagerNetwork{
         return userList;
     }
 
-    public User getUser(){
-        return this.user;
-    }
 
 
     

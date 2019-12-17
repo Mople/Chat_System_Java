@@ -5,10 +5,8 @@ import java.util.*;
 
 public class Server {
 
-    private ManagerNetwork manager;
 
-    public Server(ManagerNetwork man) {
-        this.manager=man;
+    public Server() {
         waitConnection();
         
     }
@@ -19,7 +17,7 @@ public class Server {
             servSocket= new ServerSocket(3600);
             Boolean stop=false;
             while(!stop){
-            new TCPServerThread(servSocket.accept(),this.manager.getUser());
+            new TCPListenerThread(servSocket.accept());
             }  
             
         }

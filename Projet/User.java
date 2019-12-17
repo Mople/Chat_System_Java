@@ -23,6 +23,14 @@ public class User{
         return this.addr;
     }
 
+    /*
+    Set Methods
+    */
+
+    public void setLogin(String login){
+        this.userLogin=login;
+    }
+
     
 
 }

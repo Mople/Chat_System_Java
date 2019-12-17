@@ -14,12 +14,12 @@ public class Controller{
         String name= askPseudo(sc);
         InetAddress addr = findUserAddr();
         this.user=new User(name, addr);
-        System.out.println(addr);
+
         this.manager=new ManagerNetwork(user);
         
-        Thread tc =new TerminalCommand(sc);
+        Thread tc =new TerminalCommand(this,this.sc);
         try{tc.join();}catch(InterruptedException e){}
-        sc.close();
+        this.sc.close();
         
     }
 
@@ -58,7 +58,12 @@ public class Controller{
         manager.printUserList();
     }
     
-    
+    public void setUserLogin(String login){
+        this.user.setLogin(login);
+    }
 
+    public void send(String userName,String msg){
+        this.manager.sendMessage(userName, msg);
+    }
 
 }

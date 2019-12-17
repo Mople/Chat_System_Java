@@ -5,41 +5,39 @@ import java.lang.*;
 
 public class Client extends Thread{
 
-	private User user;
+	private InetAddress destAddr;
 	private int port;
+	private String msg;
 
-    public Client (User user, int port) {
-		this.user=user;
+    public Client (User user, int port,String msg) {
+		this.destAddr=user.getInetAddress();
 		this.port=port;
+		this.msg=msg;
 		this.start();
 		
     }
 
     public void run() {
 		Socket link=null;
-		String input;
-		//BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
 		
+		try{
+			link = new Socket(this.destAddr,this.port);
+		}catch(Exception e){
+			System.out.println("Error create socket Client"+e);
+		}
+		
+		try {
 			
-		while (true){
-			try{link = new Socket(user.getInetAddress(),this.port);}catch(Exception e){break;}
-			
-			try {
-				
-				//PrintWriter out = new PrintWriter(link.getOutputStream(),true);
-				BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-				try{input = in.readLine();}catch(Exception IOException){break;}
-				if (input != null){	
-					System.out.println("Client "+this.user.getLogin()+input);
-				}
-				link.close();
-			}
-			catch (Exception IOException){
-				System.out.println("IO");
-			}
+			PrintWriter out = new PrintWriter(link.getOutputStream(),true);
+			out.println(this.msg);
+			link.close();
+		}
+		catch (Exception IOException){
+			System.out.println("IO");
+		}
 
 			
-		}
+		
 	}
 		
 		
