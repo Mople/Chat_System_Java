@@ -12,14 +12,16 @@ public class UDPListener extends Thread{
     }
 
     public void run() {
-        while(true){
-            DatagramSocket dgramSocket = null;
+        DatagramSocket dgramSocket = null;
+        Boolean stop=false;
             try{
                 dgramSocket = new DatagramSocket(3500);
             }
             catch(SocketException e){
                 System.out.println("Error create DatagramSocket");
             }
+        while(!stop){
+            
 
             byte[] buffer = new byte[256];
             DatagramPacket inPacket = new DatagramPacket(buffer, buffer.length);
@@ -30,8 +32,11 @@ public class UDPListener extends Thread{
             }catch(IOException e){
                 System.out.println("Error IO udplist");
             }
-            dgramSocket.close();
         }
+        
+        dgramSocket.close();
+        
+
     }
 
 }

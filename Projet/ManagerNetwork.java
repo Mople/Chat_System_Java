@@ -57,6 +57,7 @@ public class ManagerNetwork{
     public void sendUDPConnectionReply(InetAddress address){
         System.out.println("test");
         System.out.println(this.userLogin +" "+ address);
+        
         this.udpSend.sendReply(this.userLogin,address);
     }
     
