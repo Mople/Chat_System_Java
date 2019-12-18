@@ -28,15 +28,16 @@ public class ManagerNetwork{
     public void readUDPPacket(UDPPacket packet) {
         String data = packet.getData();
         System.out.println("Packet received");
+        System.out.println("- "+data);
         if (data.startsWith("New User : ")){
             String pseudoUser = data.replaceFirst("New User : ", "");
             User newUser = new User(pseudoUser, packet.getInetAddress());
-            userList.add(newUser);
+            this.userList.add(newUser);
             sendUDPConnectionReply(newUser.getInetAddress());
             System.out.println("New user on network " + pseudoUser);
             System.out.println("New userList :");
             printUserList();
-            System.out.println("Size of userList : "+userList.size());
+            System.out.println("Size of userList : "+this.userList.size());
         }
         else if (data.startsWith("User on network : ")){
             String pseudoUser = data.replaceFirst("User on network : ", "");
@@ -45,7 +46,7 @@ public class ManagerNetwork{
             System.out.println("User already on network " + pseudoUser);
             System.out.println("New userList :");
             printUserList();
-            System.out.println("Size of userList : " + userList.size());
+            System.out.println("Size of userList : " + this.userList.size());
         }
         
     } 
@@ -54,7 +55,9 @@ public class ManagerNetwork{
 
     //Reply to a broadcast
     public void sendUDPConnectionReply(InetAddress address){
-        udpSend.sendReply(this.userLogin,address);
+        System.out.println("test");
+        System.out.println(this.userLogin +" "+ address);
+        this.udpSend.sendReply(this.userLogin,address);
     }
     
   

@@ -67,6 +67,6 @@ public class Controller{
     }
 
     public void displayMessageReceived(User user, String message){
-
+        System.out.println("Message received from "+user.getLogin()+" : "+message);
     }
 }

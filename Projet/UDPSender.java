@@ -1,17 +1,23 @@
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.lang.*;
 
 public class UDPSender{
 
-    
+    private DatagramSocket datagramSocket;
 
     public UDPSender(String login){
+        try{
+        this.datagramSocket= new DatagramSocket();
+        }catch(SocketException e){
+            System.out.println("Error create diagram socket sender");
+        }
         sendFirstMessage(login);
     }
 
     public void sendFirstMessage(String login) {
-        System.out.println("SEND");
+        System.out.println("SEND First message");
         String msg = "New User : "+login;
 
         
@@ -39,22 +45,26 @@ public class UDPSender{
 
 
     public void sendReply(String login, InetAddress address) {
+        //sleep(1000);
+        System.out.println("test2 :"+address);
         String msg = "User on network : "+login;
 
-        DatagramSocket dgramSocket = null;
+        //DatagramSocket dgramSocket = null;
         DatagramPacket outPacket = null;
-        try{
+        /*try{
             dgramSocket = new DatagramSocket();
         }catch(SocketException e){
             System.out.println("Error create diagram socket sender");
-        }
+        }*/
+        System.out.println("-- "+msg);
         outPacket = new DatagramPacket(msg.getBytes(), msg.length(),address,3500);
         try{
-            dgramSocket.send(outPacket);
+            this.datagramSocket.send(outPacket);
         }
         catch(IOException e){
             System.out.println("Error send dgram packet");
         }
-            dgramSocket.close();
+        System.out.println("test3");
+            //dgramSocket.close();
     }
 }
