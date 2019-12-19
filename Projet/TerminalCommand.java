@@ -13,8 +13,9 @@ public class TerminalCommand extends Thread{
     }
 
     public void run(){
-        while(true){
-            System.out.println("Next action ?");
+        Boolean stop=false;
+        while(!stop){
+            System.out.println("Next action ? (START CHAT/CLOSE)");
             String commande = this.sc.nextLine();
             if (commande.startsWith("START CHAT")){
                 System.out.println("With who?");
@@ -26,6 +27,7 @@ public class TerminalCommand extends Thread{
             }
             else if(commande.startsWith("CLOSE")){
                 System.out.println("Closing application");
+                stop= true;
             }
             else{
                 System.out.println("Unknown command");

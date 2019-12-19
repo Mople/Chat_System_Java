@@ -25,6 +25,7 @@ public class ManagerNetwork{
 
 
     //Read the packet received and do something depending on the message
+    /*
     public void readUDPPacket(UDPPacket packet) {
         String data = packet.getData();
         System.out.println("Packet received");
@@ -49,7 +50,7 @@ public class ManagerNetwork{
             System.out.println("Size of userList : " + this.userList.size());
         }
         
-    } 
+    }*/
 
     
 
@@ -101,6 +102,10 @@ public class ManagerNetwork{
         }
     }
 
+
+    public void addUser(User user){
+        this.userList.add(user);
+    }
 
     public void printUserList(){
         Iterator<User> iteUser = userList.iterator();

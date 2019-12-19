@@ -19,6 +19,8 @@ public class Controller{
         Thread tc =new TerminalCommand(this,this.sc);
         try{tc.join();}catch(InterruptedException e){}
         this.sc.close();
+        System.out.println("end");
+        System.exit(0);
         
     }
 
