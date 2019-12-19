@@ -13,7 +13,7 @@ public class ReadUDPPacket extends Thread{
     }
 
 
-    synchronized public void run(){
+    public void run(){
         String data = this.packet.getData();
         System.out.println("Packet received");
         System.out.println("- "+data);

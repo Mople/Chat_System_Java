@@ -103,11 +103,11 @@ public class ManagerNetwork{
     }
 
 
-    public void addUser(User user){
+    synchronized public void addUser(User user){
         this.userList.add(user);
     }
 
-    public void printUserList(){
+    synchronized public void printUserList(){
         Iterator<User> iteUser = userList.iterator();
         while (iteUser.hasNext()){
             User currentUser = iteUser.next();
